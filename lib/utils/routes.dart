@@ -1,0 +1,8 @@
+import 'package:flutter/cupertino.dart';
+import 'package:iot_smart_home/pages/home_page.dart';
+import 'package:iot_smart_home/pages/splash_page.dart';
+
+Map<String, Widget Function(BuildContext)> routes = {
+  '/': (context) => HomePage(),
+  // HomePage.routeName: (context) => HomePage()
+};
