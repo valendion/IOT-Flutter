@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:iot_smart_home/pages/home_page/tab_first.dart';
 import 'package:iot_smart_home/pages/home_page/tab_second.dart';
+import 'package:iot_smart_home/pages/home_page/tab_third.dart';
 import 'package:iot_smart_home/style/theme.dart';
-import 'package:slide_digital_clock/slide_digital_clock.dart';
+
+import '../../utils/dummyData.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home_page';
@@ -51,7 +52,7 @@ class HomePage extends StatelessWidget {
         body: TabBarView(children: [
           tabFirst(context, dateFormat),
           tabSecond(context),
-          const Text('Tab 3')
+          tabThird(context, historis)
         ]),
       ),
     );

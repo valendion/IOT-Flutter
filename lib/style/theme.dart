@@ -28,6 +28,7 @@ final TextTheme myTextTheme = TextTheme(
       fontSize: 10, fontWeight: FontWeight.w400, letterSpacing: 1.5),
 );
 
+Color orangeColor = Color(0xfffa6149);
 Color whiteColor = Colors.white;
 Color blackColor = Colors.black;
 Color greyColor = Colors.grey;

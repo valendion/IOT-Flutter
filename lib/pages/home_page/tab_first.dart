@@ -6,6 +6,7 @@ import '../../style/theme.dart';
 
 Widget tabFirst(BuildContext context, String dateFormat) {
   return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
     children: [
       Container(
           padding: const EdgeInsets.all(20),
@@ -246,10 +247,10 @@ Widget tabFirst(BuildContext context, String dateFormat) {
       const SizedBox(
         height: 16,
       ),
-      Expanded(child: SvgPicture.asset('assets/img/illustration_iot.svg')),
-      const SizedBox(
-        height: 16,
-      ),
+      // Container(
+      //     height: 120,
+      //     width: double.infinity,
+      //     child: SvgPicture.asset('assets/img/illustration_iot.svg')),
     ],
   );
 }
