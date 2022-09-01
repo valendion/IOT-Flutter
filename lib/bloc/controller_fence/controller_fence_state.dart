@@ -7,7 +7,8 @@ abstract class ControllerStateFence {
 }
 
 class ControllerInitialFence extends ControllerStateFence {
-  ControllerInitialFence() : super(false);
+  bool initialData;
+  ControllerInitialFence({this.initialData = false}) : super(initialData);
 }
 
 class ControllerLoadedFence extends ControllerStateFence {

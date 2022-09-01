@@ -7,7 +7,9 @@ abstract class ControllerLampLivingRoomState {
 }
 
 class ControllerLampLivingRoomInitial extends ControllerLampLivingRoomState {
-  ControllerLampLivingRoomInitial() : super(false);
+  bool initialData;
+  ControllerLampLivingRoomInitial({this.initialData = false})
+      : super(initialData);
 }
 
 class ControllerLoadedLampLivingRoom extends ControllerLampLivingRoomState {

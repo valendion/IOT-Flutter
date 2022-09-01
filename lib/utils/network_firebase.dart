@@ -4,9 +4,9 @@ import '../model/monitoring_model.dart';
 
 // class NetworkFirebase {
 //   Future<Monitoring> getMonitoring(DatabaseReference ref) async {
-//     DataSnapshot snapshot = await ref.get();
-//     Monitoring monitoring = snapshot.value
+//     DataSnapshot snapshot = await ref.child('monitoring').get();
+//     var monitoring = snapshot.value;
 
-//     return snapshot.value;
+//     return monitoring;
 //   }
 // }

@@ -21,6 +21,11 @@ class HomePage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          title: Center(
+            child: Text('Smart Home',
+                style: Theme.of(context).textTheme.bodyText1?.merge(
+                    TextStyle(color: greyColor, fontWeight: FontWeight.bold))),
+          ),
           backgroundColor: whiteColor,
           bottom: TabBar(
             isScrollable: false,
@@ -53,7 +58,8 @@ class HomePage extends StatelessWidget {
         ),
         body: TabBarView(children: [
           tabFirst(context, dateFormat, fb),
-          tabSecond(context),
+          tabSecond(context, fb),
+          // tabThird(context, historis)
           tabThird(context, historis)
         ]),
       ),

@@ -7,7 +7,8 @@ abstract class ControllerLampPatioState {
 }
 
 class ControllerLampPatioInitial extends ControllerLampPatioState {
-  ControllerLampPatioInitial() : super(false);
+  bool initialData;
+  ControllerLampPatioInitial({this.initialData = false}) : super(initialData);
 }
 
 class ControllerLoadedLampPatio extends ControllerLampPatioState {

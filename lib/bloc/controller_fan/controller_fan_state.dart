@@ -7,7 +7,8 @@ abstract class ControllerFanState {
 }
 
 class ControllerFanInitial extends ControllerFanState {
-  ControllerFanInitial() : super(false);
+  bool initialData;
+  ControllerFanInitial({this.initialData = false}) : super(false);
 }
 
 class ControllerLoadedFan extends ControllerFanState {

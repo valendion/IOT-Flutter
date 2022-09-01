@@ -7,7 +7,8 @@ abstract class ControllerIronState {
 }
 
 class ControllerIronInitial extends ControllerIronState {
-  ControllerIronInitial() : super(false);
+  bool initialData;
+  ControllerIronInitial({this.initialData = false}) : super(initialData);
 }
 
 class ControllerLoadedIron extends ControllerIronState {

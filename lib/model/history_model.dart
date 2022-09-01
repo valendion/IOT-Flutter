@@ -1,21 +1,23 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'history_model.g.dart';
+
+@JsonSerializable()
 class HistoryModel {
-  late String nameComponent;
-  late String imagePath;
-  late String time;
-  late String action;
+  @JsonKey(name: 'nama_komponen')
+  late String namaKomponen;
+
+  late String waktu;
+  late String aksi;
 
   HistoryModel({
-    required this.nameComponent,
-    required this.imagePath,
-    required this.time,
-    required this.action,
+    required this.namaKomponen,
+    required this.waktu,
+    required this.aksi,
   });
 
   factory HistoryModel.fromJson(Map<String, dynamic> json) {
-    return HistoryModel(
-        nameComponent: json['nameComponent'],
-        imagePath: json['imagePath'],
-        time: json['time'],
-        action: json['action']);
+    return _$HistoryModelFromJson(json);
   }
+
+  Map<String, dynamic> toJson() => _$HistoryModelToJson(this);
 }

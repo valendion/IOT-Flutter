@@ -3,12 +3,13 @@ part of 'controller_door_bloc.dart';
 @immutable
 abstract class ControllerStateDoor {
   bool statusDoor;
-  // bool statusFence;
   ControllerStateDoor(this.statusDoor);
 }
 
 class ControllerInitialDoor extends ControllerStateDoor {
-  ControllerInitialDoor() : super(false);
+  bool initialData;
+
+  ControllerInitialDoor({this.initialData = false}) : super(initialData);
 }
 
 class ControllerLoadedDoor extends ControllerStateDoor {
