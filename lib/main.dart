@@ -1,9 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iot_smart_home/bloc/controller_door/controller_door_bloc.dart';
 import 'package:iot_smart_home/style/color_pallete.dart';
 import 'package:iot_smart_home/utils/routes.dart';
-
 import 'bloc/controller_fan/controller_fan_bloc.dart';
 import 'bloc/controller_fence/controller_fence_bloc.dart';
 import 'bloc/controller_iron/controller_iron_bloc.dart';
@@ -11,7 +11,9 @@ import 'bloc/controller_lamp_living_room/controller_lamp_living_room_bloc.dart';
 import 'bloc/controller_lamp_patio/controller_lamp_patio_bloc.dart';
 import 'style/theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

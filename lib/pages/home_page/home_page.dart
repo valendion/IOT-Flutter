@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:iot_smart_home/pages/home_page/tab_first.dart';
@@ -9,6 +10,7 @@ import '../../utils/dummyData.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home_page';
+  final fb = FirebaseDatabase.instance;
   String dateFormat = DateFormat("EEEEE, dd/MM/yyyy").format(DateTime.now());
 
   HomePage({Key? key}) : super(key: key);
@@ -50,7 +52,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
         body: TabBarView(children: [
-          tabFirst(context, dateFormat),
+          tabFirst(context, dateFormat, fb),
           tabSecond(context),
           tabThird(context, historis)
         ]),
