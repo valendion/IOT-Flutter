@@ -3,6 +3,8 @@
    <application
         android:label="iot_smart_home"
         android:name="${applicationName}"
+        usesCleartextTraffic="true"
+androidSupportRtl="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

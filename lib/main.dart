@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iot_smart_home/bloc/controller_door/controller_door_bloc.dart';
+import 'package:iot_smart_home/bloc/history/history_action_bloc.dart';
 import 'package:iot_smart_home/style/color_pallete.dart';
 import 'package:iot_smart_home/utils/routes.dart';
 import 'bloc/controller_fan/controller_fan_bloc.dart';
@@ -41,6 +42,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<ControllerLampLivingRoomBloc>(
           create: (context) => ControllerLampLivingRoomBloc(),
+        ),
+        BlocProvider<HistoryActionBloc>(
+          create: (context) => HistoryActionBloc(),
         ),
       ],
       child: MaterialApp(

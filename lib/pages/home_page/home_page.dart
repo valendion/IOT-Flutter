@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
           tabFirst(context, dateFormat, fb),
           tabSecond(context, fb),
           // tabThird(context, historis)
-          tabThird(context, historis)
+          tabThird(context, fb)
         ]),
       ),
     );

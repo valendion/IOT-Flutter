@@ -1,7 +1,7 @@
 import '../model/history_model.dart';
 import '../model/history_model_dummy.dart';
 
-List<HistoryModeDummy> historis = [
+List<HistoryModeDummy> history = [
   HistoryModeDummy(
       namaKomponen: 'Pintu',
       gambar: 'assets/img/door.png',

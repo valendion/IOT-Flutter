@@ -1,17 +1,17 @@
 class ImageComponent {
   String? getImageComponent(String component) {
     switch (component) {
-      case 'kipas':
+      case 'Kipas':
         return 'assets/img/fan.png';
-      case 'lampu_tamu':
+      case 'Lampu Tamu':
         return 'assets/img/floor-lamp.png';
-      case 'lampu_teras':
+      case 'Lampu Teras':
         return 'assets/img/lamp.png';
-      case 'setrika':
+      case 'Setrika':
         return 'assets/img/iron.png';
-      case 'pagar':
+      case 'Pagar':
         return 'assets/img/fence.png';
-      case 'pintu':
+      case 'Pintu':
         return 'assets/img/door.png';
     }
   }
@@ -19,17 +19,17 @@ class ImageComponent {
   String getComponent(Component name) {
     switch (name) {
       case Component.kipas:
-        return 'kipas';
+        return 'Kipas';
       case Component.lampu_tamu:
-        return 'lampu_tamu';
+        return 'Lampu Tamu';
       case Component.lampu_teras:
-        return 'lampu_teras';
+        return 'Lampu Teras';
       case Component.setrika:
-        return 'setrika';
+        return 'Setrika';
       case Component.pagar:
-        return 'pagar';
+        return 'Pagar';
       case Component.pintu:
-        return 'pintu';
+        return 'Pintu';
     }
   }
 }

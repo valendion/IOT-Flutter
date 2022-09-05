@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:iot_smart_home/model/history_model.dart';
-import 'package:iot_smart_home/model/history_model_dummy.dart';
 import 'package:iot_smart_home/style/theme.dart';
 
 import '../utils/image_component.dart';
 
-Widget listHistory(BuildContext context, HistoryModeDummy historyModel) {
+Widget listHistory(BuildContext context, HistoryModel historyModel) {
   var imageComponent = ImageComponent();
   return Card(
     child: Row(
@@ -16,7 +14,9 @@ Widget listHistory(BuildContext context, HistoryModeDummy historyModel) {
           height: 100,
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: AssetImage(historyModel.gambar),
+            image: AssetImage(
+                imageComponent.getImageComponent(historyModel.namaKomponen) ??
+                    ''),
           )),
         ),
         const SizedBox(

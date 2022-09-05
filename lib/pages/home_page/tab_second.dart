@@ -5,20 +5,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:iot_smart_home/bloc/controller_door/controller_door_bloc.dart';
 import 'package:iot_smart_home/bloc/controller_fan/controller_fan_bloc.dart';
 import 'package:iot_smart_home/bloc/controller_fence/controller_fence_bloc.dart';
+import 'package:iot_smart_home/model/history_model.dart';
 import '../../bloc/controller_iron/controller_iron_bloc.dart';
 import '../../bloc/controller_lamp_living_room/controller_lamp_living_room_bloc.dart';
 import '../../bloc/controller_lamp_patio/controller_lamp_patio_bloc.dart';
 import '../../model/kontrol_status_model.dart';
 import '../../style/theme.dart';
 
-Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
-  DatabaseReference ref = fb.ref('kontrol');
-  late KontrolStatusModel status;
-  var controllerBlocDoor = context.read<ControllerBlocDoor>();
+Map toJsonHistory(String aksi, String namaKomponen, String waktu) {
+  var historyModel =
+      HistoryModel(aksi: aksi, namaKomponen: namaKomponen, waktu: waktu);
+  return historyModel.toJson();
+}
 
+Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
+  DatabaseReference ref = fb.ref();
+  var historyRef = ref.child('riwayat');
+
+  late KontrolStatusModel status;
+
+  String elementClick = '';
+
+  String dateFormat = DateFormat("yyyy-MM-dd H:mm:ss").format(DateTime.now());
+
+  var controllerBlocDoor = context.read<ControllerBlocDoor>();
   var controllerBlocFence = context.read<ControllerFenceBloc>();
   var controllerBlocFan = context.read<ControllerFanBloc>();
   var controllerBlocIron = context.read<ControllerIronBloc>();
@@ -26,7 +40,7 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
   var controllerBlocLampLivingRoom =
       context.read<ControllerLampLivingRoomBloc>();
 
-  ref.onValue.listen((event) {
+  ref.child('kontrol').onValue.listen((event) {
     status = KontrolStatusModel.fromJson(
         jsonDecode(jsonEncode(event.snapshot.value)));
 
@@ -113,9 +127,21 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
                           activeColor: orangeColor,
                           value: state.statusFence,
                           onToggle: (value) {
+                            elementClick = 'Pagar';
+
                             if (state.statusFence == true) {
+                              historyRef.push().set(toJsonHistory(
+                                  (!state.statusFence).toString(),
+                                  elementClick,
+                                  dateFormat));
+
                               controllerBlocFence.add(StatusOffFence());
                             } else {
+                              historyRef.push().set(toJsonHistory(
+                                  (!state.statusFence).toString(),
+                                  elementClick,
+                                  dateFormat));
+
                               controllerBlocFence.add(StatusOnFence());
                             }
                           });
@@ -155,9 +181,18 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
                           activeColor: orangeColor,
                           value: state.statusDoor,
                           onToggle: (value) {
+                            elementClick = 'Pintu';
                             if (state.statusDoor == true) {
+                              historyRef.push().set(toJsonHistory(
+                                  (!state.statusDoor).toString(),
+                                  elementClick,
+                                  dateFormat));
                               controllerBlocDoor.add(StatusOffDoor());
                             } else {
+                              historyRef.push().set(toJsonHistory(
+                                  (!state.statusDoor).toString(),
+                                  elementClick,
+                                  dateFormat));
                               controllerBlocDoor.add(StatusOnDoor());
                             }
                           });
@@ -172,9 +207,18 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
                   builder: (context, state) {
                 return GestureDetector(
                     onTap: () {
+                      elementClick = 'Kipas';
                       if (state.statusFan == true) {
+                        historyRef.push().set(toJsonHistory(
+                            (!state.statusFan).toString(),
+                            elementClick,
+                            dateFormat));
                         controllerBlocFan.add(StatusOffFan());
                       } else {
+                        historyRef.push().set(toJsonHistory(
+                            (!state.statusFan).toString(),
+                            elementClick,
+                            dateFormat));
                         controllerBlocFan.add(StatusOnFan());
                       }
                     },
@@ -229,9 +273,18 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
                 builder: (context, state) {
                   return GestureDetector(
                     onTap: () {
+                      elementClick = 'Setrika';
                       if (state.statusIron == true) {
+                        historyRef.push().set(toJsonHistory(
+                            (!state.statusIron).toString(),
+                            elementClick,
+                            dateFormat));
                         controllerBlocIron.add(StatusOffIron());
                       } else {
+                        historyRef.push().set(toJsonHistory(
+                            (!state.statusIron).toString(),
+                            elementClick,
+                            dateFormat));
                         controllerBlocIron.add(StatusOnIron());
                       }
                     },
@@ -292,9 +345,18 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
                 builder: (context, state) {
                   return GestureDetector(
                     onTap: () {
+                      elementClick = 'Lampu Teras';
                       if (state.statusLampPatio == true) {
+                        historyRef.push().set(toJsonHistory(
+                            (!state.statusLampPatio).toString(),
+                            elementClick,
+                            dateFormat));
                         controllerBlocLampPatio.add(StatusOffLampPatio());
                       } else {
+                        historyRef.push().set(toJsonHistory(
+                            (!state.statusLampPatio).toString(),
+                            elementClick,
+                            dateFormat));
                         controllerBlocLampPatio.add(StatusOnLampPatio());
                       }
                     },
@@ -351,10 +413,19 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
                 builder: (context, state) {
                   return GestureDetector(
                     onTap: () {
+                      elementClick = 'Lampu Tamu';
                       if (state.statusLampLivingRoom == true) {
+                        historyRef.push().set(toJsonHistory(
+                            (!state.statusLampLivingRoom).toString(),
+                            elementClick,
+                            dateFormat));
                         controllerBlocLampLivingRoom
                             .add(StatusOffLampLivingRoom());
                       } else {
+                        historyRef.push().set(toJsonHistory(
+                            (!state.statusLampLivingRoom).toString(),
+                            elementClick,
+                            dateFormat));
                         controllerBlocLampLivingRoom
                             .add(StatusOnLampLivingRoom());
                       }
