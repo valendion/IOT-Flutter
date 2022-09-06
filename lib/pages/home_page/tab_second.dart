@@ -30,7 +30,7 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
 
   String elementClick = '';
 
-  String dateFormat = DateFormat("yyyy-MM-dd H:mm:ss").format(DateTime.now());
+  String dateFormat;
 
   var controllerBlocDoor = context.read<ControllerBlocDoor>();
   var controllerBlocFence = context.read<ControllerFenceBloc>();
@@ -123,6 +123,8 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
                   ),
                   BlocBuilder<ControllerFenceBloc, ControllerStateFence>(
                     builder: (context, state) {
+                      dateFormat = DateFormat("yyyy-MM-dd H:mm:ss")
+                          .format(DateTime.now());
                       return FlutterSwitch(
                           activeColor: orangeColor,
                           value: state.statusFence,
@@ -177,6 +179,8 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
                   ),
                   BlocBuilder<ControllerBlocDoor, ControllerStateDoor>(
                     builder: (context, state) {
+                      dateFormat = DateFormat("yyyy-MM-dd H:mm:ss")
+                          .format(DateTime.now());
                       return FlutterSwitch(
                           activeColor: orangeColor,
                           value: state.statusDoor,
@@ -205,6 +209,8 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
             children: [
               BlocBuilder<ControllerFanBloc, ControllerFanState>(
                   builder: (context, state) {
+                dateFormat =
+                    DateFormat("yyyy-MM-dd H:mm:ss").format(DateTime.now());
                 return GestureDetector(
                     onTap: () {
                       elementClick = 'Kipas';
@@ -271,6 +277,8 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
               }),
               BlocBuilder<ControllerIronBloc, ControllerIronState>(
                 builder: (context, state) {
+                  dateFormat =
+                      DateFormat("yyyy-MM-dd H:mm:ss").format(DateTime.now());
                   return GestureDetector(
                     onTap: () {
                       elementClick = 'Setrika';
@@ -343,6 +351,8 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
             children: [
               BlocBuilder<ControllerLampPatioBloc, ControllerLampPatioState>(
                 builder: (context, state) {
+                  dateFormat =
+                      DateFormat("yyyy-MM-dd H:mm:ss").format(DateTime.now());
                   return GestureDetector(
                     onTap: () {
                       elementClick = 'Lampu Teras';
@@ -411,6 +421,8 @@ Widget tabSecond(BuildContext context, FirebaseDatabase fb) {
               BlocBuilder<ControllerLampLivingRoomBloc,
                   ControllerLampLivingRoomState>(
                 builder: (context, state) {
+                  dateFormat =
+                      DateFormat("yyyy-MM-dd H:mm:ss").format(DateTime.now());
                   return GestureDetector(
                     onTap: () {
                       elementClick = 'Lampu Tamu';

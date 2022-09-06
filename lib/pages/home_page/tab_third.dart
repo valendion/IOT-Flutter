@@ -5,9 +5,6 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iot_smart_home/bloc/history/history_action_bloc.dart';
-import 'package:iot_smart_home/model/history_model_dummy.dart';
-import 'package:iot_smart_home/model/response_history.dart';
-import 'package:iot_smart_home/utils/dummyData.dart';
 import 'package:iot_smart_home/widget/list_history.dart';
 
 import '../../model/history_model.dart';
@@ -15,13 +12,14 @@ import '../../model/history_model.dart';
 Widget tabThird(BuildContext context, FirebaseDatabase fb) {
   DatabaseReference ref = fb.ref();
   DatabaseReference dbList = fb.ref('riwayat');
-  List<HistoryModel> dataListHistoris = [];
+  List<HistoryModel>? dataListHistoris = [];
   Map<String, dynamic>? mapHistory;
   var historiActionBloc = context.read<HistoryActionBloc>();
+  var historyAdd = HistoryActionAdd();
 
   dbList.onValue.listen((DatabaseEvent event) {
     dataListHistoris.clear();
-    print(event.snapshot.value);
+    // print(event.snapshot.value);
     mapHistory = jsonDecode(jsonEncode(event.snapshot.value));
 
     mapHistory?.forEach((key, value) {
@@ -29,22 +27,25 @@ Widget tabThird(BuildContext context, FirebaseDatabase fb) {
           namaKomponen: value['nama_komponen'],
           waktu: value['waktu'],
           aksi: value['aksi']);
+      dataListHistoris.add(history);
     });
+    // dataListHistoris.sort((a, b) {
+    //   DateTime dt2 = DateTime.parse(b.waktu);
+    //   DateTime dt1 = DateTime.parse(a.waktu);
+    //   return dt2.compareTo(dt1);
+    // });
+    // print('Tes ' + dataListHistoris.toString());
+    historyAdd.setHistoris(dataListHistoris);
+    historiActionBloc.add(historyAdd);
   });
 
   return BlocBuilder<HistoryActionBloc, HistoryActionState>(
     builder: (context, state) {
       return ListView.builder(
-          itemCount: dataListHistoris.length,
+          itemCount: state.historis.length,
           itemBuilder: (BuildContext context, int index) {
-            return listHistory(context, dataListHistoris[index]);
+            return listHistory(context, state.historis[index]);
           });
     },
   );
-
-  // return FirebaseAnimatedList(
-  //     query: dbList,
-  //     itemBuilder: (context, snapshot, _, index) {
-  //       return listHistory(context, dataListHistoris[index]);
-  //     });
 }
