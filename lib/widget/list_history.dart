@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iot_smart_home/model/history_model.dart';
 import 'package:iot_smart_home/style/theme.dart';
+import 'package:iot_smart_home/utils/constans.dart';
 
 import '../utils/image_component.dart';
 
@@ -58,13 +59,14 @@ Widget listHistory(BuildContext context, HistoryModel historyModel) {
               children: [
                 const Icon(
                   Icons.ads_click,
-                  color: const Color(0xfffa6149),
+                  color: Color(0xfffa6149),
                 ),
                 const SizedBox(
                   width: 8,
                 ),
                 Text(
-                  historyModel.aksi,
+                  Constans.getAction(
+                      historyModel.aksi, historyModel.namaKomponen),
                   style: Theme.of(context)
                       .textTheme
                       .caption

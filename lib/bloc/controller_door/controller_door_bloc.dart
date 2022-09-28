@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:iot_smart_home/model/history_model.dart';
 import 'package:meta/meta.dart';
 
 part 'controller_door_event.dart';

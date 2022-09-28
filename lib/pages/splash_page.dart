@@ -38,8 +38,8 @@ class _SplashPageState extends State<SplashPage> {
                   fit: BoxFit.fill,
                 ),
                 Text(
-                  'Smart Home',
-                  style: Theme.of(context).textTheme.headline6?.merge(TextStyle(
+                  'Smarthome App',
+                  style: Theme.of(context).textTheme.headline5?.merge(TextStyle(
                         color: greyColor,
                       )),
                 )

@@ -14,6 +14,7 @@ class ImageComponent {
       case 'Pintu':
         return 'assets/img/door.png';
     }
+    return null;
   }
 
   String getComponent(Component name) {

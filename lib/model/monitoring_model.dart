@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'monitoring_model.g.dart';
 
@@ -14,10 +13,10 @@ class Monitoring {
   int suhu;
 
   Monitoring(
-      {required this.deteksiApi,
-      required this.kadarGas,
-      required this.kelembaban,
-      required this.suhu});
+      {this.deteksiApi = 0,
+      this.kadarGas = 0,
+      this.kelembaban = 0,
+      this.suhu = 0});
 
   factory Monitoring.fromJson(Map<String, dynamic> json) {
     return _$MonitoringFromJson(json);

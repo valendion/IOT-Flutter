@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:iot_smart_home/bloc/history/history_action_bloc.dart';
+import 'package:iot_smart_home/pages/widget/loading_widget.dart';
 import 'package:iot_smart_home/widget/list_history.dart';
 
+import '../../bloc/loading/loading_bloc.dart';
 import '../../model/history_model.dart';
 
 Widget tabThird(BuildContext context, FirebaseDatabase fb) {
@@ -16,10 +18,11 @@ Widget tabThird(BuildContext context, FirebaseDatabase fb) {
   Map<String, dynamic>? mapHistory;
   var historiActionBloc = context.read<HistoryActionBloc>();
   var historyAdd = HistoryActionAdd();
+  var loadingBloc = context.read<LoadingBloc>();
 
-  dbList.onValue.listen((DatabaseEvent event) {
+  loadingBloc.add(LoadingOn());
+  dbList.orderByChild('waktu').onValue.listen((DatabaseEvent event) {
     dataListHistoris.clear();
-    // print(event.snapshot.value);
     mapHistory = jsonDecode(jsonEncode(event.snapshot.value));
 
     mapHistory?.forEach((key, value) {
@@ -29,23 +32,37 @@ Widget tabThird(BuildContext context, FirebaseDatabase fb) {
           aksi: value['aksi']);
       dataListHistoris.add(history);
     });
-    // dataListHistoris.sort((a, b) {
-    //   DateTime dt2 = DateTime.parse(b.waktu);
-    //   DateTime dt1 = DateTime.parse(a.waktu);
-    //   return dt2.compareTo(dt1);
-    // });
-    // print('Tes ' + dataListHistoris.toString());
+
+    dataListHistoris.sort((a, b) {
+      DateFormat inputFormat1 = DateFormat('yyyy-MM-dd H:mm:ss');
+      // DateFormat inputFormat2 = DateFormat('yyyy-MM-dd');
+      DateTime dt1 = inputFormat1.parse(a.waktu);
+      DateTime dt2 = inputFormat1.parse(b.waktu);
+      // DateTime time1 = inputFormat2.parse(inputFormat2.format(dt1));
+      // DateTime time2 = inputFormat2.parse(inputFormat2.format(dt2));
+      return dt2.compareTo(dt1);
+    });
+
     historyAdd.setHistoris(dataListHistoris);
     historiActionBloc.add(historyAdd);
   });
+  loadingBloc.add(LoadingOff());
 
-  return BlocBuilder<HistoryActionBloc, HistoryActionState>(
-    builder: (context, state) {
-      return ListView.builder(
-          itemCount: state.historis.length,
-          itemBuilder: (BuildContext context, int index) {
-            return listHistory(context, state.historis[index]);
-          });
+  return BlocBuilder<LoadingBloc, LoadingState>(
+    builder: (context, loadingState) {
+      return BlocBuilder<HistoryActionBloc, HistoryActionState>(
+        builder: (context, state) {
+          if (loadingState.loading) {
+            return const LoadingWidget();
+          }
+
+          return ListView.builder(
+              itemCount: state.historis.length,
+              itemBuilder: (BuildContext context, int index) {
+                return listHistory(context, state.historis[index]);
+              });
+        },
+      );
     },
   );
 }

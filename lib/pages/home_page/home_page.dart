@@ -6,7 +6,6 @@ import 'package:iot_smart_home/pages/home_page/tab_second.dart';
 import 'package:iot_smart_home/pages/home_page/tab_third.dart';
 import 'package:iot_smart_home/style/theme.dart';
 
-import '../../utils/dummyData.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home_page';
@@ -22,7 +21,7 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Center(
-            child: Text('Smart Home',
+            child: Text('Smarthome App',
                 style: Theme.of(context).textTheme.bodyText1?.merge(
                     TextStyle(color: greyColor, fontWeight: FontWeight.bold))),
           ),
